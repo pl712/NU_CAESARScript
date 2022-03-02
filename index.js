@@ -17,7 +17,7 @@ async function launch() {
     await page.waitForSelector('#loginButton_0');
 
     await page.type('#idToken1', netID);
-    await page.type('#idToken2', '18WaterBuffalo!');
+    await page.type('#idToken2', password);
 
     await page.click('#loginButton_0')
 
