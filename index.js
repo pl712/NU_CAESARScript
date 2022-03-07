@@ -1,15 +1,24 @@
 const puppeteer = require('puppeteer')
 
-const netID = 'netid'
-const password=  'pword'    //fill this in
+const netID = 'username'
+const password=  'password'    //fill this in
 
-const subject = 'subject'
-const courseNUM = 'num'
+const subject = 'ELEC_ENG'
+const courseNUM = '327'
 
+//const browser = await puppeteer.launch({headless: false})
 
-
+// const browser = await puppeteer.launch({
+// args: [
+//     '--window-size=1920,1080'
+// ],
+// });
 async function launch() {
-    const browser = await puppeteer.launch({headless: false})
+    const browser = await puppeteer.launch({
+        headless:false,
+        args: [
+            '--window-size=1920,1080',],
+        });
     const page = await browser.newPage()
     await page.setViewport( { 'width' : 1600, 'height' : 1024 } );
     const addr = "https://caesar.ent.northwestern.edu/"
@@ -37,8 +46,7 @@ async function launch() {
     chooseClass.click();
     await page.waitForTimeout(1000);
     
-    //why arent we using splinter
-    //await page.select("#SSR_CLSRCH_WRK_SUBJECT_SRCH$0","COMP_ENG");
+    //Loop inserts here
     await page.mouse.click(600,385);
      let subjecta = subject.split("")
         for (var i = 0; i< subjecta.length; i++) {
@@ -59,3 +67,20 @@ async function launch() {
 }   
 
 launch()
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+var monitors = [];
+function loop(monitors) {
+    var length = monitors.length
+    //launch
+    while (true) {
+        for (var j = 0; j<length; j++) {
+            //navigate
+            //check class status
+        } 
+        sleep(120-length);
+    }
+}
