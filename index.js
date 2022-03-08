@@ -74,7 +74,7 @@ async function cycle(classSubj, classNum, page) {
     const searchTable = await searchResult.contentFrame();
     
     const result = await searchTable.waitForXPath('/html/body/form/div[5]/table/tbody/tr/td/div/table/tbody/tr[12]/td[2]/div/table'); //The result table
-    await result.screenshot({path: "./screenshot.png"});
+    await result.screenshot({path: "./" + classSubj + "_" + classNum + ".png"});
     const d = new Date();
     console.log("Searched for Course: " + classSubj + " " + classNum + " at time: " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
 }
