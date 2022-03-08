@@ -38,6 +38,8 @@ async function launch() {
 }   
 
 async function cycle(classSubj, classNum) {
+    await page.reload();
+
     const chooseClass = await page.waitForXPath('/html/body/form/div[2]/div[4]/div[1]/div/div[2]/div[1]/div/div/div/div[2]/div[2]/div/div[2]/div/ul/li[3]/div[2]/div');
     await page.waitForTimeout(1000);
     await chooseClass.click();
@@ -63,7 +65,10 @@ async function cycle(classSubj, classNum) {
     const result = await searchTable.waitForXPath('/html/body/form/div[5]/table/tbody/tr/td/div/table/tbody/tr[12]/td[2]/div/table'); //The result table
 }
 
-var monitors = [];
+var classList = [
+    {Subject: "COMP_SCI", Number: "214"}
+];
+
 function loop(monitors) {
     var length = monitors.length
 
@@ -71,13 +76,16 @@ function loop(monitors) {
     
     while (true) {
         for (var j = 0; j<length; j++) {
-            await page.reload()
-            //cycle(ClassSubj, ClassNum)
-            //if (parsefindtrue){
+            cycle(monitors[j].Subject, monitors[j].Number);
+            sleep(120-length);
+            //console.log("Looped")
+            //if (parsefindtru){
             //    notify user
             //    break loop
             //}
         } 
-        sleep(120-length);
+        
     }
 }
+
+loop(classList);
