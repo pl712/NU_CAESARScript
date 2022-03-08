@@ -46,6 +46,12 @@ async function launch() {
 
     const searchBtn = await frame.waitForXPath('/html/body/form/div[5]/table/tbody/tr/td/div/table/tbody/tr[4]/td[2]/div/table/tbody/tr[2]/td/table/tbody/tr[5]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td[3]/div/a/span/input')
     await searchBtn.click();
+    
+    const searchResult = await page.$("iframe[id='main_target_win0']");
+    const searchTable = await searchResult.contentFrame();
+    
+    const result = await searchTable.waitForXPath('/html/body/form/div[5]/table/tbody/tr/td/div/table/tbody/tr[12]/td[2]/div/table'); //The result table
+    //gotta parse this ig
 }   
 
 launch()
