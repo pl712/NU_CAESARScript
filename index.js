@@ -44,7 +44,7 @@ async function page(classList) {
             ///if it sees something, break
         } 
         console.log("\n");
-        await sleep(10000);
+        await sleep(120000);
     }
 }   
 
