@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer')
 
 const netID = 'plm7912'
-const password=  ''    //fill this in
+const password=  '18WaterBuffalo!'    //fill this in
 
 const subject = 'COMP_SCI'
 const courseNUM = '212'
@@ -33,6 +33,7 @@ async function launch() {
     await chooseClass.click();
     
     const frameHandle = await page.$("iframe[id='main_target_win0']");
+    await page.waitForTimeout(500);
     const frame = await frameHandle.contentFrame();
 
     const subjectSelector = await frame.waitForXPath('/html/body/form/div[5]/table/tbody/tr/td/div/table/tbody/tr[4]/td[2]/div/table/tbody/tr[2]/td/table/tbody/tr[3]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td/table/tbody/tr[3]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/div/select')
@@ -46,6 +47,14 @@ async function launch() {
 
     const searchBtn = await frame.waitForXPath('/html/body/form/div[5]/table/tbody/tr/td/div/table/tbody/tr[4]/td[2]/div/table/tbody/tr[2]/td/table/tbody/tr[5]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td[3]/div/a/span/input')
     await searchBtn.click();
+
+    await page.waitForTimeout(500);
+    const searchResult = await page.$("iframe[id='main_target_win0']");
+    const searchTable = await searchResult.contentFrame();
+
+    const result = await searchTable.waitForXPath('/html/body/form/div[5]/table/tbody/tr/td/div/table/tbody/tr[12]/td[2]/div/table'); //The result table
+    //await result.screenshot({path: './screenshot.png'});
+
 }   
 
 launch()
