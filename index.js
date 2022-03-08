@@ -6,12 +6,19 @@ const password=  ''    //fill this in
 const subject = 'COMP_SCI'
 const courseNUM = '212'
 
+var page
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function launch() {
+    
     const browser = await puppeteer.launch({headless: false})
-    const page = await browser.newPage()
+    page = await browser.newPage()
     await page.setViewport( { 'width' : 1600, 'height' : 1024 } );
-    const addr = "https://caesar.ent.northwestern.edu/"
-    await page.goto(addr)
+    
+    await page.goto("https://caesar.ent.northwestern.edu/")
     await page.waitForNavigation();
 
     await page.waitForSelector('#loginButton_0');
@@ -28,6 +35,9 @@ async function launch() {
     await chooseCourse.click();
     await page.waitForTimeout(1000);
 
+}   
+
+async function cycle(classSubj, classNum) {
     const chooseClass = await page.waitForXPath('/html/body/form/div[2]/div[4]/div[1]/div/div[2]/div[1]/div/div/div/div[2]/div[2]/div/div[2]/div/ul/li[3]/div[2]/div');
     await page.waitForTimeout(1000);
     await chooseClass.click();
@@ -36,10 +46,10 @@ async function launch() {
     const frame = await frameHandle.contentFrame();
 
     const subjectSelector = await frame.waitForXPath('/html/body/form/div[5]/table/tbody/tr/td/div/table/tbody/tr[4]/td[2]/div/table/tbody/tr[2]/td/table/tbody/tr[3]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td/table/tbody/tr[3]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/div/select')
-    await subjectSelector.select(subject);
+    await subjectSelector.select(classSubj);
 
     const courseNum = await frame.waitForXPath('/html/body/form/div[5]/table/tbody/tr/td/div/table/tbody/tr[4]/td[2]/div/table/tbody/tr[2]/td/table/tbody/tr[3]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td/table/tbody/tr[3]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td/table/tbody/tr[4]/td[4]/div/input')
-    await courseNum.type(courseNUM);
+    await courseNum.type(classNum);
 
     const existCheck = await frame.waitForXPath('/html/body/form/div[5]/table/tbody/tr/td/div/table/tbody/tr[4]/td[2]/div/table/tbody/tr[2]/td/table/tbody/tr[3]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td/table/tbody/tr[3]/td[2]/div/table/tbody/tr/td/table/tbody/tr[2]/td[2]/div/table/tbody/tr/td/table/tbody/tr[8]/td[3]/div/input[2]')
     await existCheck.click();
@@ -51,23 +61,22 @@ async function launch() {
     const searchTable = await searchResult.contentFrame();
     
     const result = await searchTable.waitForXPath('/html/body/form/div[5]/table/tbody/tr/td/div/table/tbody/tr[12]/td[2]/div/table'); //The result table
-    //gotta parse this ig
-}   
-
-launch()
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 var monitors = [];
 function loop(monitors) {
     var length = monitors.length
-    //launch
+
+    launch()
+    
     while (true) {
         for (var j = 0; j<length; j++) {
-            //navigate
-            //check class status
+            await page.reload()
+            //cycle(ClassSubj, ClassNum)
+            //if (parsefindtrue){
+            //    notify user
+            //    break loop
+            //}
         } 
         sleep(120-length);
     }
