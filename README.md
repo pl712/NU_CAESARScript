@@ -1,4 +1,4 @@
-# Northwestern University - CAESAR Course Query Script
+# Course Query Script for Northwestern University | CAESAR 
 
 JS Script to interface with CAESAR (Northwestern's course management system) to automate checking and selection process for classes. 
 
