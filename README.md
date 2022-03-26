@@ -1,8 +1,8 @@
-# NU_CAESARScript
+# Northwestern University - CAESAR Course Query Script
 
 JS Script to interface with CAESAR (Northwestern's course management system) to automate checking and selection process for classes. 
 
-Designed to make life easier for freshman and sophomores who can never get the classes they like.
+Designed to make life easier for freshman and sophomores who can never get the classes they like. Feel free to use/modify.
 
 Created by Peter Lau (Northwestern '25) and Ethan Havemann (Northwestern '25)
 
