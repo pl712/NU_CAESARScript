@@ -4,7 +4,7 @@ JS Script to interface with CAESAR (Northwestern's course management system) to 
 
 Designed to make life easier for freshman and sophomores who can never get the classes they like. Feel free to use/modify.
 
-Created by Peter Lau (Northwestern '25) and Ethan Havemann (Northwestern '25)
+Created by Peter Lau (Northwestern '25) and Ethan Havemann (Northwestern '24)
 
 --
 
